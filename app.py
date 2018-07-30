@@ -10,7 +10,7 @@ class Users(object):
         self.users = []
         self.single_user_holder = dict()
     def adduser(self, username, email, password, role):
-        print("creating use")
+        print("creating user ...")
         if username and email and password:
             
             now = datetime.datetime.now()
