@@ -10,7 +10,9 @@ class Users(object):
         self.users = []
         self.single_user_holder = dict()
     def adduser(self, username, email, password, role):
+        print("creating use")
         if username and email and password:
+            
             now = datetime.datetime.now()
             date_created = now.strftime("%Y-%m-%d %H:%M")
 
@@ -54,7 +56,7 @@ class comments(object):
         # placeholder for comments
         self.comments = []
 
-    def addrecipe(self, message, date_created, author):
+    def addcomment(self, message, date_created, author):
         """add a new recipe"""
         acomment = dict()
         if message:
@@ -80,9 +82,9 @@ class comments(object):
         return self.comments
 
 if __name__=="__main__":
-	args = str(sys.argv)
+	args = sys.argv
+	print (args[1])
 	if args[1] == "adduser":
 		user_obj= Users()
 		user_obj.adduser(args[2], args[3], args[4], args[5])
-
-
+		print(user_obj.all_users())
