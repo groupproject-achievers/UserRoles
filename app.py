@@ -1,7 +1,8 @@
-import os
+import os, sys
 
 import datetime
-# models
+#  
+
 
 class Users(object):
 
@@ -79,4 +80,9 @@ class comments(object):
         return self.comments
 
 
+if __name__=="__main__":
+	args = str(sys.argv)
+	if args[1] == "adduser":
+		user_obj= Users()
+		user_obj.adduser(args[2], args[3], args[4], args[5])
 
