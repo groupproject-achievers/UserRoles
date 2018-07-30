@@ -1,9 +1,9 @@
-import , sys
+import os, sys
 
 import datetime
 #  
 
-args = str(sys.argv)
+
 class Users(object):
 
     def __init__(self):
@@ -34,6 +34,7 @@ class Users(object):
         # on failure to add return false
         return 0
 
+
     def login(self, username, password):
         '''login an existing user'''
         for user in self.users:
@@ -42,4 +43,11 @@ class Users(object):
             else:
                 return False
         
+
+if __name__=="__main__":
+	args = str(sys.argv)
+	if args[1] == "adduser":
+		user_obj= Users()
+		user_obj.adduser(args[2], args[3], args[4], args[5])
+
 
