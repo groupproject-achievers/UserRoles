@@ -9,7 +9,7 @@ class Users(object):
     def __init__(self):
         self.users = []
         self.single_user_holder = dict()
-    def adduser(self, username, email, password, role):
+    def add_user(self, username, email, password, role):
         print("creating user ...")
         if username and email and password:
             
@@ -41,6 +41,9 @@ class Users(object):
         """login an existing user"""
         for user in self.users:
             if username in user['username'] and password in user['password']:
+                now = datetime.datetime.now()
+                date_logged = now.strftime("%Y-%m-%d %H:%M")
+                user["last_login"] = date_logged
                 return True
         else:
             return False
@@ -56,7 +59,7 @@ class comments(object):
         # placeholder for comments
         self.comments = []
 
-    def addcomment(self, message, date_created, author):
+    def add_comment(self, message, author):
         """add a new recipe"""
         acomment = dict()
         if message:
@@ -77,7 +80,7 @@ class comments(object):
         else:
             # return false
             return 0
-    def modifyComment(self, id, message):
+    def modify_comment(self, id, message):
     	acomment = dict()
     	if message:
             for i in self.comments:
@@ -91,22 +94,23 @@ class comments(object):
 
 if __name__=="__main__":
 	user_obj= Users()
+	comment_obj = comments()
 	current_user = None
 	while True:
 		command= input("#- ")
 		if command == ("exit"):
 			break
-		if command == "add_user":
+		elif command == "add_user":
 			username = input ("username: ")
 			email = input ("email: ")
 			password  = input("password: ")
 			role = input("role(admin/norm/mod): ")
 			while not (role == "mod" or role == "admin" or role == "norm"):
 				role = input("enter a valid role \n role(admin/norm/mod): ")
-			user_obj.adduser(username, email, password, role)
+			user_obj.add_user(username, email, password, role)
 			print("user created")
 
-		if command == "login":
+		elif command == "login":
 			username = input ("username: ")
 			password  = input("password: ")
 			if user_obj.login(username, password):
@@ -116,7 +120,17 @@ if __name__=="__main__":
 			else:
 				print("wrong username or password")
 
-
-		if command == "all_users":
+		elif command == "add_comment":
+			if current_user:
+				message = input ("message: ")
+				comment_obj.add_comment(message, current_user)
+			else:
+				print("you have to login first")
+		elif command == "all_users":
 			print(user_obj.all_users())
+		elif command == "all_comments":
+			print(comment_obj.all_comments())
+
+		else:
+			print ("enter valid command")
 
