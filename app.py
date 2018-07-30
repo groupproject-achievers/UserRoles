@@ -101,6 +101,8 @@ if __name__=="__main__":
 			email = input ("email: ")
 			password  = input("password: ")
 			role = input("role(admin/norm/mod): ")
+			while not (role == "mod" or role == "admin" or role == "norm"):
+				role = input("enter a valid role \n role(admin/norm/mod): ")
 			user_obj.adduser(username, email, password, role)
 			print("user created")
 
@@ -112,7 +114,8 @@ if __name__=="__main__":
 				print ("logged in")
 
 			else:
-				print("wromg username or password")
+				print("wrong username or password")
+
 
 		if command == "all_users":
 			print(user_obj.all_users())
