@@ -77,14 +77,22 @@ class comments(object):
         else:
             # return false
             return 0
+    def modifyComment(self, id, message):
+    	acomment = dict()
+        if message:
+            for i in self.comments:
+                counter += 1
+                if id == counter:
+		            i['message'] = message
+		            
 
     def all_comments(self):
         return self.comments
 
 if __name__=="__main__":
 	args = sys.argv
-	print (args[1])
+	user_obj= Users()
 	if args[1] == "adduser":
-		user_obj= Users()
 		user_obj.adduser(args[2], args[3], args[4], args[5])
-		print(user_obj.all_users())
+	if args[1] == "login":
+ 		user_obj.login(args[2], args[3])
