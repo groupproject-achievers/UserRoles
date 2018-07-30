@@ -34,3 +34,12 @@ class Users(object):
         # on failure to add return false
         return 0
 
+    def login(self, username, password):
+        '''login an existing user'''
+        for user in self.users:
+            if username in user['username'] and password in user['password']:
+                return True
+            else:
+                return False
+        
+
