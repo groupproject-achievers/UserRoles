@@ -1,4 +1,4 @@
-import os, sys
+import os
 
 import datetime
 #  
@@ -79,20 +79,41 @@ class comments(object):
             return 0
     def modifyComment(self, id, message):
     	acomment = dict()
-        if message:
+    	if message:
             for i in self.comments:
                 counter += 1
                 if id == counter:
-		            i['message'] = message
+                	i['message'] = message
 		            
 
     def all_comments(self):
         return self.comments
 
 if __name__=="__main__":
-	args = sys.argv
 	user_obj= Users()
-	if args[1] == "adduser":
-		user_obj.adduser(args[2], args[3], args[4], args[5])
-	if args[1] == "login":
- 		user_obj.login(args[2], args[3])
+	current_user = None
+	while True:
+		command= input("#- ")
+		if command == ("exit"):
+			break
+		if command == "add_user":
+			username = input ("username: ")
+			email = input ("email: ")
+			password  = input("password: ")
+			role = input("role(admin/norm/mod): ")
+			user_obj.adduser(username, email, password, role)
+			print("user created")
+
+		if command == "login":
+			username = input ("username: ")
+			password  = input("password: ")
+			if user_obj.login(username, password):
+				current_user = username 
+				print ("logged in")
+
+			else:
+				print("wromg username or password")
+
+		if command == "all_users":
+			print(user_obj.all_users())
+
